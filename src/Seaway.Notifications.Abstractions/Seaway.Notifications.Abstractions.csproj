@@ -6,7 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<PackageId>Seaway.Notifications.Abstractions</PackageId>
-		<Version>1.0.0</Version>
+		<Version>1.0.1</Version>
 		<Authors>Seaway Printing Company</Authors>
 		<Company>Seaway Printing Company</Company>
 		<Description>Abstractions for the Seaway.Notifications unified notification framework.</Description>
