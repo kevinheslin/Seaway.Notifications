@@ -2,7 +2,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Seaway.Notifications.Abstractions\Seaway.Notifications.Abstractions.csproj" />
-    <ProjectReference Include="..\Seaway.Notifications.Data\Seaway.Notifications.Data.csproj" />
+	  <ProjectReference Include="..\Seaway.Notifications.Data\Seaway.Notifications.Data.csproj"
+					PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,7 +20,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<PackageId>Seaway.Notifications</PackageId>
-		<Version>1.0.1</Version>
+		<Version>1.0.2</Version>
 		<Authors>Seaway Printing Company</Authors>
 		<Company>Seaway Printing Company</Company>
 		<Description>Unified notification framework for Seaway Printing Company applications.</Description>
