@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Seaway.Notifications.Abstractions/Seaway.Notifications.Abstractions.csproj" />
+    <Project Path="src/Seaway.Notifications.AdminUI/Seaway.Notifications.AdminUI.csproj" />
+    <Project Path="src/Seaway.Notifications.Data/Seaway.Notifications.Data.csproj" />
+    <Project Path="src/Seaway.Notifications/Seaway.Notifications.csproj" />
+  </Folder>
+</Solution>

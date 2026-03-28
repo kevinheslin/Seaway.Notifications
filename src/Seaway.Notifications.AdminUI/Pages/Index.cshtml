@@ -1,0 +1,43 @@
+@page "/admin/notifications"
+@model Seaway.Notifications.AdminUI.Pages.IndexModel
+@{
+    ViewData["Title"] = "Notification Types";
+}
+
+<div class="admin-page-header">
+    <h1>Notification Types</h1>
+</div>
+
+@if (!Model.NotificationTypes.Any())
+{
+    <p class="admin-empty">No notification types registered for this application.</p>
+}
+else
+{
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Active Subscriptions</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var type in Model.NotificationTypes)
+            {
+                <tr>
+                    <td>
+                        <strong>@type.DisplayName</strong><br />
+                        <code>@type.TypeKey</code>
+                    </td>
+                    <td>@type.Description</td>
+                    <td>@type.Subscriptions.Count(s => s.IsActive)</td>
+                    <td>
+                        <a href="/admin/notifications/@type.Id" class="admin-btn">Manage</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
