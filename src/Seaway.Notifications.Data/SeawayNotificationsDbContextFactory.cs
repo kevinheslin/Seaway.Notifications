@@ -17,3 +17,4 @@ internal sealed class SeawayNotificationsDbContextFactory
         return new SeawayNotificationsDbContext(options);
     }
 }
+

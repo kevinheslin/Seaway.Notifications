@@ -2,5 +2,8 @@
 
 public interface INotificationDispatcher
 {
-    Task<NotificationResult> SendAsync(string notificationTypeKey, NotificationContext context);
+    Task<NotificationResult> SendAsync(
+        string channel,
+        string recipient,
+        NotificationContext context);
 }

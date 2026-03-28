@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Seaway.Mailer.Extensions;
-using Seaway.Mailer;
 using Seaway.Notifications.Abstractions;
 using Seaway.Notifications.Channels;
 using Seaway.Notifications.Data;
@@ -17,22 +15,12 @@ public static class ServiceCollectionExtensions
         var options = new SeawayNotificationsOptions();
         configure(options);
 
-        // Database
+        // Database — log only
         services.AddDbContext<SeawayNotificationsDbContext>(db =>
             db.UseSqlServer(options.ConnectionString));
 
-        // Email channel — always registered
-        services.AddSeawayMailer(mailerOptions =>
-        {
-            mailerOptions.SmtpHost = options.Email.SmtpHost;
-            mailerOptions.SmtpPort = options.Email.SmtpPort;
-            mailerOptions.UseTls = options.Email.UseSsl;
-            mailerOptions.FromAddress = options.Email.FromAddress;
-            mailerOptions.FromDisplayName = options.Email.FromDisplayName;
-            mailerOptions.SmtpUsername = options.Email.SmtpUsername;
-            mailerOptions.SmtpPassword = options.Email.SmtpPassword;
-        });
-
+        // Email channel — IAlertMailer is already registered by AddSeawayMailer()
+        // in the consuming app. We resolve it from DI.
         services.AddScoped<INotificationChannel, EmailNotificationChannel>();
 
         // SMS channel — only if configured
@@ -62,8 +50,12 @@ public static class ServiceCollectionExtensions
                     options.Phone.FromNumber));
         }
 
-        // Dispatcher
-        services.AddScoped<INotificationDispatcher, NotificationDispatcher>();
+        // Dispatcher — pass AppKey through as a scalar
+        services.AddScoped<INotificationDispatcher>(sp =>
+            new NotificationDispatcher(
+                sp.GetRequiredService<SeawayNotificationsDbContext>(),
+                sp.GetRequiredService<IEnumerable<INotificationChannel>>(),
+                options.AppKey));
 
         return services;
     }

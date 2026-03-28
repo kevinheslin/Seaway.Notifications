@@ -16,21 +16,21 @@ internal sealed class TeamsNotificationChannel : INotificationChannel
         _webhookUrl = webhookUrl;
     }
 
-    public async Task<bool> SendAsync(string recipient, NotificationContext context)
+    public async Task<(bool Success, string Response)> SendAsync(
+        string recipient,
+        NotificationContext context)
     {
         try
         {
-            var payload = new
-            {
-                text = $"**{context.Subject}**\n\n{context.Body}"
-            };
-
+            var payload = new { text = $"**{context.Subject}**\n\n{context.Body}" };
             var response = await _http.PostAsJsonAsync(_webhookUrl, payload);
-            return response.IsSuccessStatusCode;
+            var body = await response.Content.ReadAsStringAsync();
+
+            return (response.IsSuccessStatusCode, $"HTTP {(int)response.StatusCode}: {body}");
         }
-        catch
+        catch (Exception ex)
         {
-            return false;
+            return (false, ex.Message);
         }
     }
 }

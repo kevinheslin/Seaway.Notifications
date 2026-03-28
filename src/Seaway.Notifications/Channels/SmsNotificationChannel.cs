@@ -16,20 +16,22 @@ internal sealed class SmsNotificationChannel : INotificationChannel
         _fromNumber = fromNumber;
     }
 
-    public async Task<bool> SendAsync(string recipient, NotificationContext context)
+    public async Task<(bool Success, string Response)> SendAsync(
+        string recipient,
+        NotificationContext context)
     {
         try
         {
-            await MessageResource.CreateAsync(
+            var message = await MessageResource.CreateAsync(
                 to: new Twilio.Types.PhoneNumber(recipient),
                 from: new Twilio.Types.PhoneNumber(_fromNumber),
                 body: $"{context.Subject}: {context.Body}");
 
-            return true;
+            return (true, $"SID: {message.Sid} Status: {message.Status}");
         }
-        catch
+        catch (Exception ex)
         {
-            return false;
+            return (false, ex.Message);
         }
     }
 }

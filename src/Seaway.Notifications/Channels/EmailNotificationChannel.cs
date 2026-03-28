@@ -14,7 +14,9 @@ internal sealed class EmailNotificationChannel : INotificationChannel
         _mailer = mailer;
     }
 
-    public async Task<bool> SendAsync(string recipient, NotificationContext context)
+    public async Task<(bool Success, string Response)> SendAsync(
+        string recipient,
+        NotificationContext context)
     {
         try
         {
@@ -30,12 +32,11 @@ internal sealed class EmailNotificationChannel : INotificationChannel
                                    : AlertSeverity.Error,
             });
 
-            return true;
+            return (true, "Email sent successfully.");
         }
-        catch
+        catch (Exception ex)
         {
-            return false;
+            return (false, ex.Message);
         }
     }
 }
-
