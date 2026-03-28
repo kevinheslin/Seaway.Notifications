@@ -1,12 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-	<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
 
+		<PackageId>Seaway.Notifications.AdminUI</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>Seaway Printing Company</Authors>
+		<Company>Seaway Printing Company</Company>
+		<Description>Admin UI Razor Class Library for Seaway.Notifications.</Description>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	</PropertyGroup>
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />

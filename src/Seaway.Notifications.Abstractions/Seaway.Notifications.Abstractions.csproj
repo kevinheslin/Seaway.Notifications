@@ -1,9 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<PackageId>Seaway.Notifications.Abstractions</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>Seaway Printing Company</Authors>
+		<Company>Seaway Printing Company</Company>
+		<Description>Abstractions for the Seaway.Notifications unified notification framework.</Description>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	</PropertyGroup>
 
 </Project>
